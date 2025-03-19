@@ -28,7 +28,7 @@ you'd add it to your log like so::
     beer.volume = Volume(us_pint=1)
     beer.save()
 
-    print beer # '1 us_pint of Total Domination'
+    print(beer) # '1 us_pint of Total Domination'
 
 Perhaps you next recklessly dove into your stash of terrible,
 but nostalgia-inducing Russian beer and had a half-liter of
@@ -40,14 +40,14 @@ you'd add it to your log like so::
     another_beer.volume = Volume(l=0.5)
     another_beer.save()
 
-    print beer # '0.5 l of #9'
+    print(beer) # '0.5 l of #9'
 
 Note that although the original unit specified is stored for display,
 that the unit is abstracted to the measure's standard unit for storage and comparison::
 
-    print beer.volume                       # '1 us_pint'
-    print another_beer.volume               # '0.5 l'
-    print beer.volume > another_beer.volume # False
+    print(beer.volume)                       # '1 us_pint'
+    print(another_beer.volume)               # '0.5 l'
+    print(beer.volume > another_beer.volume) # False
 
 
 How is this data stored?
