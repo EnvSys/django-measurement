@@ -53,4 +53,34 @@ that the unit is abstracted to the measure's standard unit for storage and compa
 How is this data stored?
 ------------------------
 
-Since django-measurement v2.0 there value will be stored in a single float field.
+Since django-measurement v2.0 the value will be stored in a single float field.
+This is of course unit less, but the value stored will be interpreted to be
+in the ``STANDARD_UNIT`` of the ``measurement.measures`` class.
+
+For example, for a measure that looks like so::
+
+    class Production(MeasureBase):
+        STANDARD_UNIT = "g"
+        UNITS = {
+            "g": 1.0,
+            "t": 1000000.0,
+            "lb": 453.59237,
+            "cwt": 45359.237,
+        }
+        ALIAS = {
+            "gram": "g",
+            "metric tonne": "t",
+            "metric ton": "t",
+            "tonne": "t",
+            "pound": "lb",
+            "hundredweight": "cwt",
+            "short hundredweight": "cwt",
+        }
+        SI_UNITS = ["g"]
+
+the value will be stored in the database in grams, because that is the
+``STANDARD_UNIT``.
+
+For a ``BidimensionalMeasure`` the value in the database is stored in units
+that correspond to the ``STANDARD_UNIT`` of the ``PRIMARY_DIMENSION`` over the
+``STANDARD_UNIT`` of the ``REFERENCE_DIMENSION``.
